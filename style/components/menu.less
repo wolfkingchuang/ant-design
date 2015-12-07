@@ -35,7 +35,6 @@
     transition: all 0.3s ease;
   }
 
-
   &-item-active,
   &-submenu-title:hover {
     background-color: tint(@primary-color, 90%);
@@ -98,8 +97,10 @@
     white-space: nowrap;
 
     // Disabled state sets text to gray and nukes hover/tab effects
-    &.@{menu-prefix-cls}-item-disabled, &.@{menu-prefix-cls}-submenu-disabled {
+    &.@{menu-prefix-cls}-item-disabled,
+    &.@{menu-prefix-cls}-submenu-disabled {
       color: #999 !important;
+      cursor: not-allowed;
     }
   }
   & > &-item-divider {
@@ -161,13 +162,12 @@
   &-submenu-title {
     .anticon {
       width: 14px;
-      margin-right: 9px;
-      top: 1px;
+      margin-right: 8px;
     }
   }
 
   &-horizontal {
-    border: none;
+    border: 0;
     border-bottom: 1px solid #e9e9e9;
     box-shadow: none;
     z-index: 0;
@@ -192,7 +192,8 @@
         &:hover {
           color: @primary-color;
         }
-        &:before, &:after {
+        &:before,
+        &:after {
           position: absolute;
           background-color: transparent;
           width: 20px;
@@ -213,8 +214,10 @@
     }
   }
 
-  &-vertical, &-inline {
-    & > .@{menu-prefix-cls}-item, & > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
+  &-vertical,
+  &-inline {
+    & > .@{menu-prefix-cls}-item,
+    & > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
       padding: 0px 16px 0 28px;
       font-size: 12px;
       line-height: 42px;
@@ -225,7 +228,8 @@
   &-vertical&-sub {
     padding: 0;
     transform-origin: 0 0;
-    & > .@{menu-prefix-cls}-item, & > .@{menu-prefix-cls}-submenu {
+    & > .@{menu-prefix-cls}-item,
+    & > .@{menu-prefix-cls}-submenu {
       transform-origin: 0 0;
     }
   }
@@ -237,10 +241,11 @@
 
   &-sub&-inline {
     padding: 0;
-    border: none;
+    border: 0;
     box-shadow: none;
     border-radius: 0;
-    & > .@{menu-prefix-cls}-item, & > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
+    & > .@{menu-prefix-cls}-item,
+    & > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
       line-height: 42px;
       height: 42px;
       list-style-type: disc;

@@ -214,6 +214,7 @@ let TintShadeTool = React.createClass({
       result: '#2db7f5',
       color: '#2db7f5',
       justCopied: false,
+      darkBackground: false,
       value: 80
     };
   },
@@ -239,8 +240,10 @@ let TintShadeTool = React.createClass({
     }
     let tintOrShade = this.state.value > 0 ? 'tint' : 'shade';
     let c = new Values(this.state.color);
+    let resultColor = c[tintOrShade](Math.abs(this.state.value));
     this.setState({
-      result: '#' + c[tintOrShade](Math.abs(this.state.value)).hex
+      result: '#' + resultColor.hex,
+      darkBackground: resultColor.getBrightness() < 50
     });
   },
   copySuccess(e) {
@@ -251,11 +254,16 @@ let TintShadeTool = React.createClass({
     });
   },
   render() {
+    var marks = {
+      '-100': '加黑',
+      '0': '原色',
+      '100': '加白'
+    };
     return <div style={{margin: '40px 0'}}>
       <div>
         <Clip onSuccess={this.copySuccess} data-clipboard-text={this.state.result} style={{border: 0, background: '#fff', cursor: 'pointer'}}>
           <Tooltip title="点击色块复制色值">
-            <div style={{backgroundColor: this.state.result}} className={'color-block ' + (this.state.justCopied ? 'copied' : '')}></div>
+            <div style={{backgroundColor: this.state.result}} className={'color-block ' + (this.state.justCopied ? 'copied' : '') + (this.state.darkBackground ? ' dark' : '')}></div>
           </Tooltip>
         </Clip>
         <span style={{width: 188, display: 'inline-block', fontFamily: 'Consolas'}}>{this.state.result}</span>
@@ -263,13 +271,8 @@ let TintShadeTool = React.createClass({
         <InputNumber style={{width: 70}} value={this.state.value} onChange={this.handleChangeValue} min={-100} max={100} step={5} />
         <span style={{margin: '0 0 0 8px'}}>%</span>
       </div>
-      <div style={{marginTop: 20}}>
-        <span>加黑</span>
-        <div style={{width: 360, display: 'inline-block', verticalAlign: 'middle', position: 'relative', top: -1, margin: '0 8px'}}>
-          <Slider value={this.state.value} onChange={this.handleChangeValue} min={-100} max={100} step={5} />
-          <div style={{backgroundColor:'#81D4F9', width: 2, height: 4, position: 'absolute', top: 10, fontSize: 12, textAlign: 'center', left: 180}}></div>
-        </div>
-        <span>加白</span>
+      <div style={{width: 420, margin: '40px 10px 60px'}}>
+        <Slider value={this.state.value} onChange={this.handleChangeValue} min={-100} max={100} step={5} marks={marks} />
       </div>
     </div>;
   }
@@ -305,5 +308,8 @@ ReactDOM.render(<TintShadeTool />, document.getElementById('color-tint-shade-too
 .color-block.copied:after {
   opacity: 1;
   top: 0;
+}
+.color-block.dark:after {
+  color: #fff;
 }
 </style>

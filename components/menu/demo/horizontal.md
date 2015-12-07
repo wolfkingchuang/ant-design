@@ -7,14 +7,14 @@
 ---
 
 ````jsx
-import { Menu, Icon, Switch } from 'antd';
+import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 
 const App = React.createClass({
   getInitialState() {
     return {
       current: 'mail'
-    }
+    };
   },
   handleClick(e) {
     console.log('click ', e);
@@ -31,7 +31,7 @@ const App = React.createClass({
         <Menu.Item key="mail">
           <Icon type="mail" />导航一
         </Menu.Item>
-        <Menu.Item key="app">
+        <Menu.Item key="app" disabled>
           <Icon type="appstore" />导航二
         </Menu.Item>
         <SubMenu title={<span><Icon type="setting" />导航 - 子菜单</span>}>

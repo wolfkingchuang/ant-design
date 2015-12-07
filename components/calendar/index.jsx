@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
+import zhCN from './locale/zh_CN';
 import FullCalendar from 'rc-calendar/lib/FullCalendar';
 import {PREFIX_CLS} from './Constants';
 import Header from './Header';
@@ -14,15 +14,15 @@ function zerofixed (v) {
 
 class Calendar extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      value: this.parseDateFromValue(props.value),
+      value: this.parseDateFromValue(props.value || new Date()),
       mode: props.mode,
     };
   }
   parseDateFromValue(value) {
-    const date = new GregorianCalendar();
-    date.setTime(value);
+    const date = new GregorianCalendar(this.props.locale);
+    date.setTime(+value);
     return date;
   }
   componentWillReceiveProps(nextProps) {
@@ -56,10 +56,10 @@ class Calendar extends Component {
     </div>;
   }
   setValue(value) {
-    if (this.state.value !== value) {
+    if (!('value' in this.props) && this.state.value !== value) {
       this.setState({ value });
-      this.props.onPanelChange(value, this.state.mode);
     }
+    this.props.onPanelChange(value, this.state.mode);
   }
   setType(type) {
     const mode = (type === 'date') ? 'month' : 'year';
@@ -68,27 +68,42 @@ class Calendar extends Component {
       this.props.onPanelChange(this.state.value, mode);
     }
   }
+  onPanelSelect(value, e) {
+    if (e && e.target === 'month') {
+      // Because the fullcalendars'type will automaticlly change to 'date' when select month cell
+      // but we didn't want this, so we force update view to get things right
+      // since ours 'mode' would not change.
+      this.forceUpdate();
+    }
+  }
   render() {
     const props = this.props;
     const {value, mode} = this.state;
     const {locale, prefixCls, style, className, fullscreen} = props;
     const type = (mode === 'year') ? 'month' : 'date';
 
+    let cls = className || '';
+    if (fullscreen) {
+      cls += (' ' + prefixCls + '-fullscreen');
+    }
+
     return (
-      <div className={(className ? className : '') + ' ' + (fullscreen ? prefixCls + '-fullscreen' : '' )} style={style}>
+      <div className={cls} style={style}>
         <Header
           fullscreen={fullscreen}
           type={type}
           value={value}
-          locale={locale}
+          locale={locale.lang}
           prefixCls={prefixCls}
           onTypeChange={this.setType.bind(this)}
           onValueChange={this.setValue.bind(this)}/>
         <FullCalendar
           {...props}
+          locale={locale.lang}
           type={type}
           prefixCls={prefixCls}
           showHeader={false}
+          onSelect={this.onPanelSelect.bind(this)}
           value={value}
           monthCellRender={this.monthCellRender.bind(this)}
           dateCellRender={this.dateCellRender.bind(this)} />
@@ -112,12 +127,11 @@ Calendar.propTypes = {
 Calendar.defaultProps = {
   monthCellRender: noop,
   dateCellRender: noop,
-  locale: CalendarLocale,
+  locale: zhCN,
   fullscreen: true,
   prefixCls: PREFIX_CLS,
   onPanelChange: noop,
   mode: 'month',
-  value: new Date(),
 };
 
 export default Calendar;

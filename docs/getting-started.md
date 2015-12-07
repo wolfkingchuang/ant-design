@@ -7,16 +7,27 @@
 
 Ant Design React 致力于提供给程序员**愉悦**的开发体验。
 
+## 第一个例子
+
+最简单的试用方式参照以下 JSFiddle 演示, 也推荐 Fork 本例来进行 Bug Report, 注意不要在实际项目中这样使用。
+
+- [antd JSFiddle](http://jsfiddle.net/yiminghe/9zrstuto/1/)
+
+
+## 标准开发
+
 实际项目开发中，你会需要对 ES2015 和 JSX 代码的构建、调试、代理、打包部署等一系列工程化的需求。
 我们提供了一套 `npm` + `webpack` 的开发工具链来辅助开发，下面我们用一个简单的实例来说明。
 
 ### 1. 安装命令行工具
 
+> 使用 `antd-init` 前，务必确认 [Node.js](https://nodejs.org/en/) 已经升级到 v4.x 或以上。
+
 ```bash
 $ npm install antd-init -g
 ```
 
-[更多使用说明](https://github.com/ant-design/antd-bin#使用说明)。
+[更多使用说明](https://github.com/ant-tool/xtool/#使用说明)。
 
 ### 2. 创建一个项目
 
@@ -28,7 +39,7 @@ $ antd-init
 $ npm install
 ```
 
-若下面例子发生报错，尝试用 `npm install antd@beta --save` 安装 `0.10.x` 或更高版本。
+若安装缓慢报错，可尝试用 `cnpm` 或别的镜像源自行安装：`rm -rf node_modules && cnpm install`.
 
 ### 3. 使用组件
 
@@ -87,6 +98,18 @@ Ant Design React 支持所有的现代浏览器和 IE8+。
 
 对于 IE8，需要提供 [es5-shim](http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills) 等 Polyfills 的支持。
 
+<div class="code-line-highlight"></div>
+
+<style>
+.code-line-highlight {
+  box-shadow: 0px 196px 0px rgba(255, 207, 0, 0.16);
+  height: 42px;
+  margin-top: -42px;
+  position: relative;
+  z-index: 1;
+}
+</style>
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -95,7 +118,7 @@ Ant Design React 支持所有的现代浏览器和 IE8+。
     <!-- 引入样式 -->
     <link rel="stylesheet" href="/index.css">
     <!-- Polyfills -->
-    <script src="https://as.alipayobjects.com/component/??console-polyfill/0.2.2/index.js,es5-shim/4.1.14/es5-shim.min.js,es5-shim/4.1.14/es5-sham.min.js,html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://as.alipayobjects.com/??component/console-polyfill/0.2.2/index.js,component/es5-shim/4.1.14/es5-shim.min.js,component/es5-shim/4.1.14/es5-sham.min.js,component/html5shiv/3.7.2/html5shiv.min.js,g/component/media-match/2.0.2/media.match.min.js"></script>
   </head>
   <body>
   </body>
@@ -106,21 +129,13 @@ Ant Design React 支持所有的现代浏览器和 IE8+。
 </html>
 ```
 
-<div class="code-line-highlight"></div>
-
-<style>
-.code-line-highlight {
-  box-shadow: 0 -239px 0 rgba(255, 207, 0, 0.16);
-  height: 42px;
-  margin-bottom: -42px;
-}
-</style>
-
-
 ## 自行构建
 
-如果想自己维护工作流，我们推荐使用 [webpack](http://webpack.github.io/) 进行构建和调试，可以参考我们所使用的 [webpack 配置](https://github.com/ant-design/antd-build/blob/master/lib/webpack.common.config.js)。
+如果想自己维护工作流，我们推荐使用 [webpack](http://webpack.github.io/) 进行构建和调试，可以参考我们所使用的 [webpack 配置](https://github.com/ant-tool/atool-build/blob/master/src/getWebpackCommonConfig.js)。
 
+### 改变主色系
+
+- [配置代码示例](https://github.com/ant-tool/xtool/tree/master/examples/customize-antd-theme)
 
 ## 小甜点
 

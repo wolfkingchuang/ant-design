@@ -31,7 +31,7 @@ const columns = [{
 }];
 
 const dataSource = new Table.DataSource({
-  url: "/components/table/demo/data.json",
+  url: '/components/table/demo/data.json',
   resolve: function(result) {
     return result.data;
   },
@@ -41,7 +41,7 @@ const dataSource = new Table.DataSource({
     return {
       total: result.totalCount,
       pageSize: result.pageSize
-    }
+    };
   },
   // 和后台接口接收的参数进行适配
   // 参数里提供了分页、筛选、排序的信息
@@ -64,25 +64,40 @@ const dataSource = new Table.DataSource({
 const Test = React.createClass({
   getInitialState() {
     return {
-      dataSource: null
+      dataSource: null,
+      pagination: {
+        onChange: this.hanlePageChange
+      }
     };
   },
-  refresh() {
+  hanlePageChange(page) {
+    // 使用受控属性 current，方便外部设置页数
+    const pagination = this.state.pagination;
+    pagination.current = page;
     this.setState({
-      dataSource: dataSource.clone()
+      pagination,
+      dataSource: dataSource.clone(),
+    });
+  },
+  refresh() {
+    // 回到第一页
+    const pagination = this.state.pagination;
+    pagination.current = 1;
+    this.setState({
+      pagination,
+      dataSource: dataSource.clone(),
     });
   },
   changeAndRefresh() {
+    // 回到第一页
+    const pagination = this.state.pagination;
+    pagination.current = 1;
     // 可以修改原来的 dataSource 再发请求
     this.setState({
+      pagination,
       dataSource: dataSource.clone({
-        data: {
-          city: 'hz'
-        }
+        data: { city: 'hz' }
       }),
-      pagination: {
-        current: 1
-      }
     });
   },
   render() {

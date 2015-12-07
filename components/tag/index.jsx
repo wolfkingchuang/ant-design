@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
-import Icon from '../iconfont';
-const prefixCls = 'ant-tag';
+import Icon from '../icon';
 
 class AntTag extends React.Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class AntTag extends React.Component {
     return this.state.closed ? null
       : <Animate component=""
                  showProp="data-show"
-                 transitionName="zoom-tag"
+                 transitionName={this.props.prefixCls + '-zoom'}
                  onEnd={this.animationEnd.bind(this)}>
         <div data-show={!this.state.closing} className={className}>
           <a className={this.props.prefixCls + '-text'} {...this.props} />
@@ -53,7 +52,7 @@ class AntTag extends React.Component {
 }
 
 AntTag.defaultProps = {
-  prefixCls: prefixCls,
+  prefixCls: 'ant-tag',
   closable: false,
   onClose: function() {}
 };

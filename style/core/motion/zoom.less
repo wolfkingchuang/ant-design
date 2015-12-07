@@ -1,6 +1,7 @@
 .zoom-motion(@className, @keyframeName) {
   .make-motion(@className, @keyframeName);
-  .@{className}-enter, .@{className}-appear {
+  .@{className}-enter,
+  .@{className}-appear {
     transform: scale(0); // need this by yiminghe
     animation-timing-function: @ease-out-circ;
   }
@@ -15,12 +16,6 @@
 .zoom-motion(zoom-down, antZoomDown);
 .zoom-motion(zoom-left, antZoomLeft);
 .zoom-motion(zoom-right, antZoomRight);
-
-
-.zoom-tag-leave{
-  animation: antZoomOut .3s @ease-in-out-circ;
-}
-
 
 @keyframes antZoomIn {
   0% {
@@ -41,6 +36,7 @@
     transform: scale(0);
   }
 }
+
 @keyframes antZoomBigIn {
   0% {
     opacity: 0;

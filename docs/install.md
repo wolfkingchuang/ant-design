@@ -1,6 +1,6 @@
 # 安装
 
-- category: 3
+- category: 2
 - order: 2
 
 ---
@@ -51,7 +51,7 @@ $ npm install antd-bin --save-dev
 }
 ```
 
-> 更多[使用方式](https://github.com/ant-design/antd-bin/)。
+> 更多[使用方式](https://github.com/ant-tool/xtool/)。
 
 <style>
 .versions {

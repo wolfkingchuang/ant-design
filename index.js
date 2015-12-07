@@ -2,21 +2,6 @@ import React from 'react';
 
 require('./style/index.less');
 
-// matchMedia polyfill for
-// https://github.com/WickyNilliams/enquire.js/issues/82
-if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = function matchMediaPolyfill() {
-    return {
-      matches: false,
-      addListener: function () {
-      },
-      removeListener: function () {
-      }
-    };
-  };
-  window.matchMedia = window.matchMedia || matchMediaPolyfill;
-}
-
 const antd = {
   Affix: require('./components/affix'),
   Datepicker: require('./components/datepicker'),
@@ -51,14 +36,14 @@ const antd = {
   Menu: require('./components/menu'),
   Timeline: require('./components/timeline'),
   Button: require('./components/button'),
-  ButtonGroup: require('./components/button').Group,
-  Icon: require('./components/iconfont'),
-  Row: require('./components/layout').Row,
-  Col: require('./components/layout').Col,
+  Icon: require('./components/icon'),
+  Row: require('./components/row'),
+  Col: require('./components/col'),
   Spin: require('./components/spin'),
-  Form: require('./components/form').Form,
-  Input: require('./components/form').Input,
+  Form: require('./components/form'),
+  Input: require('./components/input'),
   Calendar: require('./components/calendar'),
+  Timepicker: require('./components/timepicker'),
 };
 
 antd.version = require('./package.json').version;

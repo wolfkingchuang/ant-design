@@ -104,7 +104,8 @@
     }
   }
 
-  .@{steps-prefix-cls}-head, .@{steps-prefix-cls}-main {
+  .@{steps-prefix-cls}-head,
+  .@{steps-prefix-cls}-main {
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -133,8 +134,6 @@
 
       &.anticon {
         font-size: 12px;
-        position: relative;
-        top: 1px;
       }
     }
   }
@@ -197,7 +196,7 @@
       margin-right: 10px;
       > .@{steps-prefix-cls}-icon.anticon {
         .iconfont-size-under-12px(9px);
-        top: 1px;
+        top: 0;
       }
     }
     .@{steps-prefix-cls}-main {
@@ -224,7 +223,8 @@
     }
   }
 
-  &.@{steps-prefix-cls}-small .@{steps-prefix-cls}-item.@{steps-prefix-cls}-custom .@{steps-prefix-cls}-head-inner, .@{steps-prefix-cls}-item.@{steps-prefix-cls}-custom .@{steps-prefix-cls}-head-inner {
+  &.@{steps-prefix-cls}-small .@{steps-prefix-cls}-item.@{steps-prefix-cls}-custom .@{steps-prefix-cls}-head-inner,
+  .@{steps-prefix-cls}-item.@{steps-prefix-cls}-custom .@{steps-prefix-cls}-head-inner {
     width: inherit;
     height: inherit;
     line-height: inherit;

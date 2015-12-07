@@ -1,16 +1,52 @@
-# 时间选择
+# 日期时间选择
 
 - order: 4
 
-准确到秒的时间选择面板。
+和 [时间选择框](/components/timepicer) 配合使用。
 
 ---
 
 ````jsx
-import { Datepicker } from 'antd';
+import { Datepicker, Timepicker } from 'antd';
 
-ReactDOM.render(
-  <Datepicker showTime={true} format="yyyy-MM-dd HH:mm:ss" defaultValue="2015-11-11 11:11:11"/>
+const DateTimePicker = React.createClass({
+  handleChange(from, value) {
+    this.result = this.result || new Date();
+    if (!value) {
+      if (from === 'date') {
+        this.selectedDate = false;
+      } else {
+        this.selectedTime = false;
+      }
+      return;
+    }
+    if (from === 'date') {
+      this.result.setFullYear(value.getFullYear());
+      this.result.setMonth(value.getMonth());
+      this.result.setDate(value.getDate());
+      this.selectedDate = true;
+    } else {
+      this.result.setHours(value.getHours());
+      this.result.setMinutes(value.getMinutes());
+      this.result.setSeconds(value.getSeconds());
+      this.selectedTime = true;
+    }
+    if (this.selectedDate && this.selectedTime) {
+      this.props.onSelect(this.result);
+    }
+  },
+  render() {
+    return <div>
+      <Datepicker onChange={this.handleChange.bind(null, 'date')} />
+      <Timepicker onChange={this.handleChange.bind(null, 'time')} />
+    </div>;
+  }
+});
+
+function onSelect(value) {
+  console.log('选择了时间：', value);
+}
+
+ReactDOM.render(<DateTimePicker onSelect={onSelect} />
 , document.getElementById('components-datepicker-demo-time'));
 ````
-

@@ -3,17 +3,16 @@ import Calendar from 'rc-calendar';
 import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
 import Datepicker from 'rc-calendar/lib/Picker';
 import GregorianCalendar from 'gregorian-calendar';
-import defaultLocale from './locale';
+import defaultLocale from './locale/zh_CN';
 import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
 import DateTimeFormat from 'gregorian-calendar-format';
 import objectAssign from 'object-assign';
 
-function createPicker(TheCalendar) {
+function createPicker(TheCalendar, defaultFormat) {
   return React.createClass({
     getDefaultProps() {
       return {
-        format: 'yyyy-MM-dd',
-        placeholder: '请选择日期',
+        format: defaultFormat || 'yyyy-MM-dd',
         transitionName: 'slide-up',
         popupStyle: {},
         onSelect: null, // 向前兼容
@@ -21,7 +20,7 @@ function createPicker(TheCalendar) {
         },  // onChange 可用于 Validator
         locale: {},
         align: {
-          offset: [0, -10],
+          offset: [0, -9],
         },
         open: false
       };
@@ -80,26 +79,33 @@ function createPicker(TheCalendar) {
       const timeValue = value ? new Date(value.getTime()) : null;
       // onSelect 为向前兼容.
       if (this.props.onSelect) {
-        require('util-deprecate')(this.props.onSelect, 'onSelect property of Datepicker is deprecated, use onChange instead')(timeValue);
+        require('util-deprecate')(
+          this.props.onSelect,
+          'onSelect property of Datepicker is deprecated, use onChange instead'
+        )(timeValue);
       }
       this.props.onChange(timeValue);
     },
     render() {
+      const locale = this.getLocale();
       // 以下两行代码
       // 给没有初始值的日期选择框提供本地化信息
       // 否则会以周日开始排
-      let defaultCalendarValue = new GregorianCalendar(this.getLocale());
+      let defaultCalendarValue = new GregorianCalendar(locale);
       defaultCalendarValue.setTime(Date.now());
+
+      const placeholder = ('placeholder' in this.props)
+        ? this.props.placeholder : locale.lang.placeholder;
       const calendar = (
         <TheCalendar
           disabledDate={this.props.disabledDate}
-          locale={this.getLocale().lang}
+          locale={locale.lang}
           defaultValue={defaultCalendarValue}
-          dateInputPlaceholder={this.props.placeholder}
+          dateInputPlaceholder={placeholder}
           showTime={this.props.showTime}
           prefixCls="ant-calendar"
           showOk={this.props.showTime}
-          showClear={true}/>
+          showClear />
       );
 
       let sizeClass = '';
@@ -129,15 +135,16 @@ function createPicker(TheCalendar) {
           {
             ({value}) => {
               return (
-                <span>
+              <span>
                   <input disabled={this.props.disabled}
                          onChange={this.handleInputChange}
                          value={value && this.getFormatter().format(value)}
-                         placeholder={this.props.placeholder}
+                         placeholder={placeholder}
+                         style={this.props.style}
                          className={'ant-calendar-picker-input ant-input' + sizeClass}/>
                   <span className="ant-calendar-picker-icon"/>
                 </span>
-              );
+                );
             }
           }
         </Datepicker>
@@ -147,7 +154,7 @@ function createPicker(TheCalendar) {
 }
 
 const AntDatePicker = createPicker(Calendar);
-const AntMonthPicker = createPicker(MonthCalendar);
+const AntMonthPicker = createPicker(MonthCalendar, 'yyyy-MM');
 
 const AntCalendar = React.createClass({
   getDefaultProps() {

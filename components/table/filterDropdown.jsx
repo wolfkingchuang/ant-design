@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from 'rc-menu';
 import Dropdown from '../dropdown';
-import Icon from '../iconfont';
+import Icon from '../icon';
 
 let FilterMenu = React.createClass({
   getInitialState() {
@@ -77,7 +77,7 @@ let FilterMenu = React.createClass({
              pointerEvents: 'visible'
            }}
            onClick={this.handleClearFilters}>
-          清空
+          重置
         </a>
       </Menu.Item>
     </Menu>;
