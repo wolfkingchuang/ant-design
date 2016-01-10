@@ -24,9 +24,9 @@ const Sider = React.createClass({
       openKeys: e.keyPath.slice(1)
     });
   },
-  onToggle(info){
+  onToggle(info) {
     this.setState({
-      openKeys: info.openKeys
+      openKeys: info.open ? info.keyPath : info.keyPath.slice(1)
     });
   },
   render() {
@@ -60,5 +60,5 @@ const Sider = React.createClass({
     </Menu>;
   }
 });
-ReactDOM.render(<Sider />, document.getElementById('components-menu-demo-sider-current'));
+ReactDOM.render(<Sider />, mountNode);
 ````

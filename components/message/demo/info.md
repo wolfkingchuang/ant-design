@@ -1,6 +1,6 @@
 # 普通提示
 
-- order: 2
+- order: 0
 
 信息提醒反馈。
 
@@ -14,5 +14,5 @@ const info = function() {
 };
 
 ReactDOM.render(<Button type="primary" onClick={info}>显示普通提醒</Button>
-, document.getElementById('components-message-demo-info'));
+, mountNode);
 ````

@@ -1,6 +1,6 @@
 # 含有辅助性文字介绍
 
-- order: 2
+- order: 3
 
 含有辅助性文字介绍的警告提示。
 
@@ -24,5 +24,5 @@ ReactDOM.render(<div>
     message="错误提示的文案"
     description="错误提示的辅助性文字介绍错误提示的辅助性文字介绍错误提示的辅助性文字介绍错误提示的辅助性文字介绍错误提示的辅助性文字介绍错误提示的辅助性文字介绍"
     type="error" />
-</div>, document.getElementById('components-alert-demo-description'));
+</div>, mountNode);
 ````

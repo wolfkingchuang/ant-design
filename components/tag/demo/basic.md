@@ -10,7 +10,7 @@
 import { Tag } from 'antd';
 
 function onClose(e) {
-  console.log(this.props.children);
+  console.log(e, this);
 }
 
 ReactDOM.render(<div>
@@ -18,5 +18,5 @@ ReactDOM.render(<div>
   <Tag>标签二</Tag>
   <Tag closable onClose={onClose}>标签三</Tag>
   <Tag href="http://www.baidu.com">标签四（链接）</Tag>
-</div>, document.getElementById('components-tag-demo-basic'));
+</div>, mountNode);
 ````

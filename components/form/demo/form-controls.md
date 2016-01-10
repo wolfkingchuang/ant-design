@@ -33,7 +33,7 @@ ReactDOM.render(
       label="文本域："
       labelCol={{span: 6}}
       wrapperCol={{span: 14}}>
-      <Input type="textarea" id="control-textarea"/>
+      <Input type="textarea" id="control-textarea" rows="3" />
     </FormItem>
 
     <FormItem
@@ -91,5 +91,5 @@ ReactDOM.render(
         </RadioGroup>
     </FormItem>
   </Form>
-, document.getElementById('components-form-demo-form-controls'));
+, mountNode);
 ````

@@ -1,6 +1,6 @@
 # 加载中
 
-- order: 5
+- order: 3
 
 进行全局 loading，异步自行移除。
 
@@ -16,5 +16,5 @@ const success = function() {
 };
 
 ReactDOM.render(<Button onClick={success}>显示加载中...</Button>
-, document.getElementById('components-message-demo-loading'));
+, mountNode);
 ````

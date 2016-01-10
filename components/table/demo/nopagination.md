@@ -2,7 +2,7 @@
 
 - order: 8
 
-传入 pagination 为 false 即可。
+传入 pagination 为 false 即可。此时表格将完整显示 dataSource 内的数据，不进行任何分页。
 
 ---
 
@@ -38,5 +38,5 @@ const data = [{
 }];
 
 ReactDOM.render(<Table columns={columns} dataSource={data} pagination={false} />
-, document.getElementById('components-table-demo-nopagination'));
+, mountNode);
 ````

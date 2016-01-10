@@ -1,8 +1,8 @@
-# 选择
+# 可选择
 
 - order: 1
 
-第一列是联动的选择框，rowSelection 中配置 `type="radio"` 可设为单选。
+第一列是联动的选择框。
 
 ---
 
@@ -41,6 +41,9 @@ const data = [{
 
 // 通过 rowSelection 对象表明需要行选择
 const rowSelection = {
+  onChange(selectedRowKeys) {
+    console.log('selectedRowKeys changed: ' + selectedRowKeys);
+  },
   onSelect: function(record, selected, selectedRows) {
     console.log(record, selected, selectedRows);
   },
@@ -50,5 +53,5 @@ const rowSelection = {
 };
 
 ReactDOM.render(<Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-, document.getElementById('components-table-demo-row-selection'));
+, mountNode);
 ````

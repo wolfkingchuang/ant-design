@@ -7,7 +7,8 @@
 ---
 
 ````jsx
-import { Form, Select, InputNumber, Datepicker, Switch, Slider, Button, message, Row, Col } from 'antd';
+import { Form, Select, InputNumber, DatePicker, Switch,
+         Slider, Button, message, Row, Col, Upload, Icon } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -26,6 +27,17 @@ const Demo = React.createClass({
         endDate: undefined,
       }
     };
+  },
+
+  handleUpload(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(info.file.name + ' 上传成功。');
+    } else if (info.file.status === 'error') {
+      message.error(info.file.name + ' 上传失败。');
+    }
   },
 
   handleSubmit(e) {
@@ -92,18 +104,29 @@ const Demo = React.createClass({
         </FormItem>
 
         <FormItem
-          label="Datepicker 日期选择框："
+          label="DatePicker 日期选择框："
           labelCol={{span: 8}}
           required>
           <Col span="6">
-            <Datepicker name="startDate" onChange={this.setValue.bind(this, 'startDate')} value={formData.startDate} />
+            <DatePicker name="startDate" onChange={this.setValue.bind(this, 'startDate')} value={formData.startDate} />
           </Col>
           <Col span="1">
             <p className="ant-form-split">-</p>
           </Col>
           <Col span="6">
-            <Datepicker name="endDate" onChange={this.setValue.bind(this, 'endDate')} value={formData.endDate} />
+            <DatePicker name="endDate" onChange={this.setValue.bind(this, 'endDate')} value={formData.endDate} />
           </Col>
+        </FormItem>
+        <FormItem
+          label="logo图："
+          labelCol={{span: 8}}
+          wrapperCol={{span: 16}}
+          help="提示信息要长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长">
+          <Upload name="logo" action="/upload.do" listType="picture" onChange={this.handleUpload}>
+            <Button type="ghost">
+              <Icon type="upload" /> 点击上传
+            </Button>
+          </Upload>
         </FormItem>
         <Row>
           <Col span="16" offset="8">
@@ -115,5 +138,5 @@ const Demo = React.createClass({
   }
 });
 
-ReactDOM.render(<Demo />, document.getElementById('components-form-demo-mix'));
+ReactDOM.render(<Demo />, mountNode);
 ````

@@ -156,7 +156,7 @@ let ExtendPalettes = React.createClass({
       },
       {
         'title': 'Purple #5E30B5',
-        'description': '介于红色和黄色之间，传达愉悦，创造力，热情，吸引力。但橙色又不如红色那样具侵略性，同时又能够很好的引起视觉的注意力。可以作为设计的主色也可以用于辅助色。但大面积使用时需要慎重。',
+        'description': '紫色是赤黄黄绿青蓝紫中最后一名，也是人类可见光谱中波长最短的光，有华贵、信仰、神秘等含义，同时是红与蓝的结合体，传达中性、中立等信息。在界面设计中建议作为辅助颜色使用。',
         'colors': [
           "#E8DFFA", "#B196EE", "#8867D2",
           "#581CB6", "#5E30B5", "#7A43E2",
@@ -261,11 +261,11 @@ let TintShadeTool = React.createClass({
     };
     return <div style={{margin: '40px 0'}}>
       <div>
-        <Clip onSuccess={this.copySuccess} data-clipboard-text={this.state.result} style={{border: 0, background: '#fff', cursor: 'pointer'}}>
-          <Tooltip title="点击色块复制色值">
+        <Tooltip title="点击色块复制色值">
+          <CopyToClipboard onCopy={this.copySuccess} text={this.state.result}>
             <div style={{backgroundColor: this.state.result}} className={'color-block ' + (this.state.justCopied ? 'copied' : '') + (this.state.darkBackground ? ' dark' : '')}></div>
-          </Tooltip>
-        </Clip>
+          </CopyToClipboard>
+        </Tooltip>
         <span style={{width: 188, display: 'inline-block', fontFamily: 'Consolas'}}>{this.state.result}</span>
         <input className="ant-input" style={{width: 80, color: this.state.color, marginRight: 8}} value={this.state.color} onChange={this.handleChangeColor} />
         <InputNumber style={{width: 70}} value={this.state.value} onChange={this.handleChangeValue} min={-100} max={100} step={5} />
@@ -290,6 +290,7 @@ ReactDOM.render(<TintShadeTool />, document.getElementById('color-tint-shade-too
   display: inline-block;
   vertical-align: middle;
   margin-right: 8px;
+  cursor: pointer;
 }
 .color-block:after {
   position: absolute;

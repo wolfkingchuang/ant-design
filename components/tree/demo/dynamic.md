@@ -24,7 +24,7 @@ const generateTreeNodes = () => {
 
 const TreeDemo = React.createClass({
   timeout(duration = 0) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setTimeout(resolve.bind(this), duration);
     });
   },
@@ -77,5 +77,5 @@ const TreeDemo = React.createClass({
   }
 });
 
-ReactDOM.render(<TreeDemo />, document.getElementById('components-tree-demo-dynamic'));
+ReactDOM.render(<TreeDemo />, mountNode);
 ````

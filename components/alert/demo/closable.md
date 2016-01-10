@@ -1,6 +1,6 @@
 # 可关闭的警告提示
 
-- order: 1
+- order: 2
 
 显示关闭按钮，点击可关闭警告提示。
 
@@ -23,5 +23,5 @@ ReactDOM.render(<div>
     type="error"
     closable
     onClose={onClose} />
-</div>, document.getElementById('components-alert-demo-closable'));
+</div>, mountNode);
 ````

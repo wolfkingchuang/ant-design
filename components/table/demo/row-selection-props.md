@@ -1,6 +1,6 @@
-# 配置
+# 选择框属性
 
-- order: 2
+- order: 3
 
 配置选择框的默认属性。
 
@@ -47,14 +47,17 @@ const rowSelection = {
       disabled: record.name === '胡彦祖'    // 配置无法勾选的列
     };
   },
+  onChange(selectedRowKeys) {
+    console.log('selectedRowKeys changed: ' + selectedRowKeys);
+  },
   onSelect: function(record, selected, selectedRows) {
     console.log(record, selected, selectedRows);
   },
   onSelectAll: function(selected, selectedRows) {
     console.log(selected, selectedRows);
-  }
+  },
 };
 
 ReactDOM.render(<Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-, document.getElementById('components-table-demo-row-selection-props'));
+, mountNode);
 ````

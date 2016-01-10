@@ -9,9 +9,9 @@ Ant Design React 致力于提供给程序员**愉悦**的开发体验。
 
 ## 第一个例子
 
-最简单的试用方式参照以下 JSFiddle 演示, 也推荐 Fork 本例来进行 Bug Report, 注意不要在实际项目中这样使用。
+最简单的试用方式参照以下 JSFiddle 演示, 也推荐 Fork 本例来进行 `Bug Report`, 注意不要在实际项目中这样使用。
 
-- [antd JSFiddle](http://jsfiddle.net/yiminghe/9zrstuto/1/)
+- [antd JSFiddle](http://jsfiddle.net/0dso5y0x/)
 
 
 ## 标准开发
@@ -27,7 +27,7 @@ Ant Design React 致力于提供给程序员**愉悦**的开发体验。
 $ npm install antd-init -g
 ```
 
-[更多使用说明](https://github.com/ant-tool/xtool/#使用说明)。
+[更多使用说明](https://github.com/ant-design/antd-init/)。
 
 ### 2. 创建一个项目
 
@@ -47,7 +47,7 @@ $ npm install
 
 ```jsx
 import React from 'react';
-import { Datepicker, message } from 'antd';
+import { DatePicker, message } from 'antd';
 
 const App = React.createClass({
   getInitialState() {
@@ -63,7 +63,7 @@ const App = React.createClass({
   },
   render() {
     return <div style={{width: 400, margin: '100px auto'}}>
-      <Datepicker onSelect={this.handleChange} />
+      <DatePicker onChange={this.handleChange} />
       <div style={{marginTop: 20}}>当前日期：{this.state.date.toString()}</div>
     </div>;
   }
@@ -118,7 +118,7 @@ Ant Design React 支持所有的现代浏览器和 IE8+。
     <!-- 引入样式 -->
     <link rel="stylesheet" href="/index.css">
     <!-- Polyfills -->
-    <script src="https://as.alipayobjects.com/??component/console-polyfill/0.2.2/index.js,component/es5-shim/4.1.14/es5-shim.min.js,component/es5-shim/4.1.14/es5-sham.min.js,component/html5shiv/3.7.2/html5shiv.min.js,g/component/media-match/2.0.2/media.match.min.js"></script>
+    <script src="https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,es5-shim/4.1.14/es5-shim.min.js,es5-shim/4.1.14/es5-sham.min.js,html5shiv/3.7.2/html5shiv.min.js,media-match/2.0.2/media.match.min.js"></script>
   </head>
   <body>
   </body>
